@@ -1,5 +1,5 @@
 Given(/^all users are logged in and at the test table$/) do
-  (1...10).each do |i|
+  (ENV['MIN']..ENV['MAX']).each do |i|
     username = "test_#{i}"
     Capybara.session_name = username
     if i == 1
@@ -14,6 +14,7 @@ Given(/^all users are logged in and at the test table$/) do
     sleep 5
     click_link "Test Table"
   end
+  sleep 30
 end
 
 When(/^all users ask a question$/) do
