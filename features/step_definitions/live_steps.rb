@@ -1,14 +1,17 @@
 Given(/^all users are logged in and at the test table$/) do
-  visit "/start_test"
-  (1..15).each do |i|
+  (1...10).each do |i|
     username = "test_#{i}"
     Capybara.session_name = username
-    visit '/'
+    if i == 1
+      visit '/start_test'
+    else
+      visit '/'
+    end
     find('.login.button').click
     fill_in 'user_email', with: "#{username}@example.com"
     fill_in 'user_password', with: "0m0m0mtest0m0m0m"
     find('.submit_sign_in').click
-    expect(page).to have_content "Tables"
+    sleep 5
     click_link "Test Table"
   end
 end
